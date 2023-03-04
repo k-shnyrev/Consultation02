@@ -63,7 +63,9 @@ public class Main {
   }
 
   public static void printResponse(Map<String, String> cities, List<String> request) {
-    // TODO найти и напечатать ответ
+    for (String city : request) { // перебираем города в списке запросов
+      System.out.println(cities.get(city)); // выводим страну-значение по городу-ключу
+    }
   }
 
   // прочитает запрос - города, для которых надо найти страны

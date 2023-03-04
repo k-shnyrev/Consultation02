@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Main {
 
   // уже готовый репозиторий - зачем и как
@@ -39,6 +44,29 @@ public class Main {
   // Map<String, List<String>> - страна: список городов
   // Map<String, String> - город: страна
   public static void main(String[] args) {
-    System.out.println("Hello world!");
+    // будет метод readCities() для чтения входных данных
+    Map<String, String> cities = readCities();
+
+    // прочитает запрос - города, для которых надо найти страны
+    List<String> request = readRequest();
+
+    // для базы городов cities и запроса request напечатает ответ
+    printResponse(cities, request);
+  }
+
+  public static void printResponse(Map<String, String> cities, List<String> request) {
+    // TODO найти и напечатать ответ
+  }
+
+  public static List<String> readRequest() {
+    List<String> request = new ArrayList<>();
+    // TODO чтение входных данных
+    return request;
+  }
+
+  public static Map<String, String> readCities() {
+    Map<String, String> cities = new HashMap<>();
+    // TODO чтение входных данных
+    return cities;
   }
 }

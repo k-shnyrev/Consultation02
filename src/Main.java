@@ -77,12 +77,34 @@ public class Main {
   }
 
   // прочитает входные данные - базу городов
-  public static Map<String, String> readCities(BufferedReader bufferedReader) {
+  public static Map<String, String> readCities(BufferedReader bufferedReader) throws IOException {
     // здесь нельзя создавать BufferedReader - при создании он читает файл "с начала",
     // а мне может потребоваться продолжать читать уже открытый файл
     // значит, он должен прийти "снаружи", как аргумент вызова
-    Map<String, String> cities = new HashMap<>();
-    // TODO чтение входных данных
-    return cities;
+    Map<String, String> result = new HashMap<>();
+    int n = Integer.parseInt(bufferedReader.readLine());
+    for (int i = 0; i < n; ++i) {
+      String line = bufferedReader.readLine(); // line - строка входных данных
+      // line = "Germany Berlin Munich Hamburg"
+      // нам нужно разбить эти данные на страну и города
+      // и все города перебирать по очереди
+      int firstSpace = line.indexOf(' ');
+      String country = line.substring(0, firstSpace); // страна - с начала до первого пробела
+      String cities = line.substring(firstSpace + 1); // все города - после первого пробела
+      // пока строка cities с городами не пустая, искать пробел и по нему "отрезать" город
+      while (!cities.isEmpty()) {
+        int spaceIndex = cities.indexOf(' ');
+        if (spaceIndex != -1) { // пробел есть - в строке больше одного города
+          String city = cities.substring(0, spaceIndex); // беру "первый" город в строке
+          cities = cities.substring(spaceIndex + 1); // "отрезаю" взятый город
+          result.put(city, country); // кладу пару "город - страна" в результат метода
+        } else { // spaceIndex == -1, нет пробела, это последний город
+          String city = cities; // беру всю строку - это последний город
+          cities = ""; // очищаю строку cities, городов не осталось
+          result.put(city, country); // кладу пару "город - страна" в результат метода
+        }
+      }
+    }
+    return result;
   }
 }

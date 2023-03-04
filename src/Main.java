@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +20,7 @@ public class Main {
   // снизу вверх - от частного решения к общему с постепенным усложнением
   //  был в уроке 34 в последовательности коммитов
 
-  // сверху вниз - от общей идеи к конкретной реализации - требует опыта, но на собеседовании
-  // будет очень большим плюсом -- как раз покажет наличие опыта
+
   // Map
   // Map - remove, removeAll, clear
 
@@ -43,12 +45,18 @@ public class Main {
   // Два варианта Map:
   // Map<String, List<String>> - страна: список городов
   // Map<String, String> - город: страна
-  public static void main(String[] args) {
-    // будет метод readCities() для чтения входных данных
-    Map<String, String> cities = readCities();
+  public static void main(String[] args) throws IOException {
+    // сверху вниз - от общей идеи к конкретной реализации - требует опыта, но на собеседовании
+    // будет очень большим плюсом -- как раз покажет наличие опыта
+    // сразу пишете main, как будто у вас уже есть все нужные методы
+    // когда пишете, тогда и выясняете, а какие методы вам понадобятся
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    // прочитает запрос - города, для которых надо найти страны
-    List<String> request = readRequest();
+    Map<String, String> cities = readCities(bufferedReader);
+
+    // продолжит читать из того же bufferedReader
+    List<String> request = readRequest(bufferedReader);
+    bufferedReader.close();
 
     // для базы городов cities и запроса request напечатает ответ
     printResponse(cities, request);
@@ -58,13 +66,21 @@ public class Main {
     // TODO найти и напечатать ответ
   }
 
-  public static List<String> readRequest() {
+  // прочитает запрос - города, для которых надо найти страны
+  public static List<String> readRequest(BufferedReader bufferedReader) {
+    // здесь нельзя создавать BufferedReader - при создании он читает файл "с начала",
+    // а мне может потребоваться продолжать читать уже открытый файл
+    // значит, он должен прийти "снаружи", как аргумент вызова
     List<String> request = new ArrayList<>();
     // TODO чтение входных данных
     return request;
   }
 
-  public static Map<String, String> readCities() {
+  // прочитает входные данные - базу городов
+  public static Map<String, String> readCities(BufferedReader bufferedReader) {
+    // здесь нельзя создавать BufferedReader - при создании он читает файл "с начала",
+    // а мне может потребоваться продолжать читать уже открытый файл
+    // значит, он должен прийти "снаружи", как аргумент вызова
     Map<String, String> cities = new HashMap<>();
     // TODO чтение входных данных
     return cities;

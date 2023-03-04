@@ -67,12 +67,17 @@ public class Main {
   }
 
   // прочитает запрос - города, для которых надо найти страны
-  public static List<String> readRequest(BufferedReader bufferedReader) {
+  public static List<String> readRequest(BufferedReader bufferedReader) throws IOException {
     // здесь нельзя создавать BufferedReader - при создании он читает файл "с начала",
     // а мне может потребоваться продолжать читать уже открытый файл
     // значит, он должен прийти "снаружи", как аргумент вызова
     List<String> request = new ArrayList<>();
-    // TODO чтение входных данных
+    int n = Integer.parseInt(bufferedReader.readLine());
+    for (int i = 0; i < n; ++i) {
+//      String line = bufferedReader.readLine(); // Прочитали город для поиска
+//      request.add(line); // добавили к запросу
+      request.add(bufferedReader.readLine());
+    }
     return request;
   }
 
